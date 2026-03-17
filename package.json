@@ -1,0 +1,29 @@
+{
+  "name": "barcos-marinheiros-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web API em Node.js para reservar barcos por marinheiros",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/902508083/barcos-marinheiros-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/902508083/barcos-marinheiros-api/issues"
+  },
+  "homepage": "https://github.com/902508083/barcos-marinheiros-api#readme",
+  "dependencies": {
+    "better-sqlite3": "^12.8.0",
+    "body-parser": "^2.2.2",
+    "celebrate": "^15.0.3",
+    "express": "^5.2.1",
+    "punycode": "^2.3.1"
+  }
+}
