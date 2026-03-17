@@ -22,6 +22,6 @@ app.get(/.*/, (req,res) => {                     // 404 handling
 // Server =====================================================
 var port = 8080;
 app.listen(port);
-console.log("Using port " + port);
+console.log("Servidor iniciado..." + port);
 
 module.exports = app;
