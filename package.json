@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/902508083/barcos-marinheiros-api#readme",
   "dependencies": {
-    "better-sqlite3": "^12.8.0",
     "body-parser": "^2.2.2",
     "celebrate": "^15.0.3",
     "express": "^5.2.1",
+    "oracledb": "^6.10.0",
     "punycode": "^2.3.1"
   }
 }
