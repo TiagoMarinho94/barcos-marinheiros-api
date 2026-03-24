@@ -12,3 +12,9 @@ exports.getMarinheirosByID = async function (id) {
         return null;
     return result;
 }
+exports.getMarinheirosByClassif = async function (classif) {
+    const result = await marinheirosRepository.getMarinheirosByClassif(classif);
+    if (!result || result.length === 0)
+        return null;
+    return result;
+}
