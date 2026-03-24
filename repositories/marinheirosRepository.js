@@ -30,3 +30,14 @@ exports.getMarinheirosByClassif = async function (classif){
         if (lig) await lig.close();
     }
 }
+exports.createMarinheiro = async function (_nome, _classif, _idade){
+    let lig;
+    try{
+        lig = await OracleDB.getConnection(dbConfig);
+        const result = await lig.execute('INSERT INTO MARINHEIROS (NOME, CLASSIFICACAO, IDADE) VALUES (:1, :2, :3)', [_nome, _classif, _idade], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        await lig.commit();
+        return result.rowsAffected;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
