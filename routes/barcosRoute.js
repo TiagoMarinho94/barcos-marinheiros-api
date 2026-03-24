@@ -9,7 +9,7 @@ router.post('/',
     celebrate({
         body: Joi.object({
             nome: Joi.string().min(2).required(),
-            cor: Joi.string().min(1).required()
+            cor: Joi.string().min(1).max(10).required()
         })
     }),
 ctr.createBarco);
