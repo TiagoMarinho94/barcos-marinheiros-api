@@ -44,3 +44,14 @@ exports.createMarinheiro = async function (req,res) {
         res.status(500).json({error: err.message});
     }
 }
+exports.updateMarinheirosByID = async function (req,res) {
+    try {
+        var result = await MarinheirosSrv.updateMarinheirosByID(req.params.id, req.body.classif);
+        if(!result)
+            return res.status(404).json({ error: 'Não foram encontrados marinheiros com esse ID'});
+        res.sendStatus(204);
+    }
+    catch (err){
+        res.status(500).json({error: err.message});
+    }
+}
