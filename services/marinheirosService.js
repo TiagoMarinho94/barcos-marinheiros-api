@@ -25,7 +25,7 @@ exports.createMarinheiro = async function (_nome, _classif, _idade) {
     return result;
 }
 exports.updateMarinheirosByID = async function (id,_classif) {
-    const result = await marinheirosRepository.updateMarinheirosByID(id);
+    const result = await marinheirosRepository.updateMarinheirosByID(id,_classif);
     if (!result || result === 0)
         return null;
     return result;
