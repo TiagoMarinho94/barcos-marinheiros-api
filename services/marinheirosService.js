@@ -18,3 +18,9 @@ exports.getMarinheirosByClassif = async function (classif) {
         return null;
     return result;
 }
+exports.createMarinheiro = async function (_nome, _classif, _idade) {
+    const result = await marinheirosRepository.createMarinheiro(_nome, _classif, _idade);
+    if (!result || result === 0)
+        return null;
+    return result;
+}
