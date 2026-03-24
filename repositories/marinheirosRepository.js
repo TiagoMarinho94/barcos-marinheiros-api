@@ -34,7 +34,11 @@ exports.createMarinheiro = async function (_nome, _classif, _idade){
     let lig;
     try{
         lig = await OracleDB.getConnection(dbConfig);
-        const result = await lig.execute('INSERT INTO MARINHEIROS (NOME, CLASSIFICACAO, IDADE) VALUES (:1, :2, :3)', [_nome, _classif, _idade], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        //procurar o maior ID existente
+        const maxId = await lig.execute('SELECT NVL(MAX(ID_MARINHEIRO),0) + 1 AS NOVO_ID FROM MARINHEIROS', [], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        const novoId = maxId.rows[0].NOVO_ID;
+        //inserir agora os novos dados na tabela
+        const result = await lig.execute('INSERT INTO MARINHEIROS (ID_MARINHEIRO, NOME, CLASSIFICACAO, IDADE) VALUES (:1, :2, :3, :4)', [novoId,_nome, _classif, _idade], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
         await lig.commit();
         return result.rowsAffected;
     } finally {
