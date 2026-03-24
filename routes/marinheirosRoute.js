@@ -6,6 +6,7 @@ const ctr = require('../controllers/marinheirosController');
 router.get('/', ctr.getAllMarinheiros);
 router.get('/classificacao/:classif', ctr.getMarinheirosByClassif);
 router.get('/:id', ctr.getMarinheirosByID);
+
 router.post('/',
     celebrate({
         body: Joi.object({
@@ -15,5 +16,13 @@ router.post('/',
         })
     }),
 ctr.createMarinheiro);
+
+router.patch('/:id',
+    celebrate({
+        body: Joi.object({
+            classif: Joi.number().min(1).max(10).required()
+        })
+    }),
+ctr.updateMarinheirosByID);
 
 module.exports = router;
