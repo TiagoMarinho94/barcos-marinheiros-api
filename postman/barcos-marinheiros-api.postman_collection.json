@@ -69,6 +69,35 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "US001-api/marinheiros",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"Tiago\",\r\n    \"classif\": 10,\r\n    \"idade\": 31\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/marinheiros",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "marinheiros"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
