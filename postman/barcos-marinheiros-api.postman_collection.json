@@ -26,6 +26,27 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "US004-api/marinheiros/22",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/marinheiros/22",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "marinheiros",
+            "22"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
