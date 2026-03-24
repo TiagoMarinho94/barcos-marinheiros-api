@@ -35,7 +35,7 @@ exports.getMarinheirosByClassif = async function (req,res) {
 }
 exports.createMarinheiro = async function (req,res) {
     try {
-        var result = await MarinheirosSrv.createMarinheiro(req.body._nome,req.body._classif,req.body. _idade);
+        var result = await MarinheirosSrv.createMarinheiro(req.body.nome,req.body.classif,req.body.idade);
         if(!result)
             return res.status(503).json({ error: 'Erro ao criar marinheiro'});
         res.status(201).json({success: 'Marinheiro criado com sucesso'});
