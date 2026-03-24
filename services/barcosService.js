@@ -6,3 +6,9 @@ exports.getAllBarcos = async function () {
         return null;
     return result;
 }
+exports.createBarco = async function (_nome, _cor) {
+    const result = await barcosRepository.createBarco(_nome, _cor);
+    if (!result || result === 0)
+        return null;
+    return result;
+}
