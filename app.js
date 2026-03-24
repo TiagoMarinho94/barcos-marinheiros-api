@@ -12,8 +12,8 @@ var mWare = require('./middleware');
 app.use(mWare);
 
 // Routing =====================================================
-var BooksRouter = require('./routes/booksRoute');
-app.use('/api/books', BooksRouter);
+var MarinheirosRouter = require('./routes/marinheirosRoute');
+app.use('/api/marinheiros', MarinheirosRouter);
 
 app.get(/.*/, (req,res) => {                     // 404 handling
   res.status(404).send('Endpoint not found.')
