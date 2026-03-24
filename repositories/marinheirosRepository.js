@@ -45,11 +45,11 @@ exports.createMarinheiro = async function (_nome, _classif, _idade){
         if (lig) await lig.close();
     }
 }
-exports.updateMarinheirosByID = async function (id){
+exports.updateMarinheirosByID = async function (id, _classif){
     let lig;
     try{
         lig = await OracleDB.getConnection(dbConfig);
-        const result = await lig.execute('UPDATE MARINHEIROS SET CLASSIFICACAO = :1 WHERE ID_MARINHEIRO = :2', [id], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        const result = await lig.execute('UPDATE MARINHEIROS SET CLASSIFICACAO = :1 WHERE ID_MARINHEIRO = :2', [_classif, id], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
         await lig.commit();
         return result.rowsAffected;
     } finally {
