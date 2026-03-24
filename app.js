@@ -15,6 +15,9 @@ app.use(mWare);
 var MarinheirosRouter = require('./routes/marinheirosRoute');
 app.use('/api/marinheiros', MarinheirosRouter);
 
+var BarcosRouter = require('./routes/barcosRoute');
+app.use('/api/barcos', BarcosRouter);
+
 app.get(/.*/, (req,res) => {                     // 404 handling
   res.status(404).send('Endpoint not found.')
 });
