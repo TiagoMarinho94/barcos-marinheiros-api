@@ -11,3 +11,14 @@ exports.getAllBarcos = async function (req, res) {
         res.status(500).json({ error: err.message });
     }
 }
+exports.createBarco = async function (req,res) {
+    try {
+        var result = await BarcosSrv.createBarco(req.body.nome,req.body.cor);
+        if(!result)
+            return res.status(503).json({ error: 'Erro ao criar barco'});
+        res.status(201).json({success: 'Barco criado com sucesso'});
+    }
+    catch (err){
+        res.status(500).json({error: err.message});
+    }
+}
