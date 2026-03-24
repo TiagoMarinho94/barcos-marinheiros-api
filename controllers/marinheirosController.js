@@ -22,3 +22,14 @@ exports.getMarinheirosByID = async function (req,res) {
         res.status(500).json({error: err.message});
     }
 }
+exports.getMarinheirosByClassif = async function (req,res) {
+    try {
+        var result = await MarinheirosSrv.getMarinheirosByClassif(req.params.classif);
+        if(!result)
+            return res.status(404).json({ error: 'Não foram encontrados marinheiros com essa classificação'});
+        res.json(result);
+    }
+    catch (err){
+        res.status(500).json({error: err.message});
+    }
+}
