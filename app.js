@@ -12,11 +12,17 @@ var mWare = require('./middleware');
 app.use(mWare);
 
 // Routing =====================================================
+//Marinheiros
 var MarinheirosRouter = require('./routes/marinheirosRoute');
 app.use('/api/marinheiros', MarinheirosRouter);
 
+//Barcos
 var BarcosRouter = require('./routes/barcosRoute');
 app.use('/api/barcos', BarcosRouter);
+
+//Reservas
+var ReservasRouter = require('./routes/reservasRoute');
+app.use('/api/reservas', ReservasRouter);
 
 app.get(/.*/, (req,res) => {                     // 404 handling
   res.status(404).send('Endpoint not found.')
