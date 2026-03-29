@@ -21,3 +21,14 @@ exports.createReserva = async function (_idmarinheiro, _idbarco, _data){
         if (lig) await lig.close();
     }
 }
+exports.deleteReserva = async function (_idmarinheiro, _idbarco, _data){
+    let lig;
+    try{
+        lig = await OracleDB.getConnection(dbConfig);
+        const result = await lig.execute('DELETE FROM RESERVAS WHERE ID_MARINHEIRO= :1 AND ID_BARCO = :2 AND TRUNC(DATA) =TO_DATE(:3, \'YYYY-MM-DD\') AND DATA > SYSDATE', [_idmarinheiro, _idbarco, _data], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        await lig.commit();
+        return result.rowsAffected;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
