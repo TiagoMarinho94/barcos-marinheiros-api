@@ -25,3 +25,13 @@ exports.createBarco = async function (_nome, _cor){
         if (lig) await lig.close();
     }
 }
+exports.getBarcosByID = async function (id) {
+    let lig;
+    try {
+        lig = await OracleDB.getConnection(dbConfig);
+        const result = await lig.execute('SELECT * FROM BARCOS WHERE ID_MARINHEIRO = :1', [id], { outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        return result.rows;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
