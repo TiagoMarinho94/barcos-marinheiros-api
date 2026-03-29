@@ -22,3 +22,14 @@ exports.createBarco = async function (req,res) {
         res.status(500).json({error: err.message});
     }
 }
+exports.getBarcosByID = async function (req, res) {
+    try {
+        var result = await BarcosSrv.getBarcosByID(req.params.id);
+        if (!result)
+            return res.status(404).json({ error: 'Não foram encontrado nenhum barco com esse ID' });
+        res.json(result);
+    }
+    catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}

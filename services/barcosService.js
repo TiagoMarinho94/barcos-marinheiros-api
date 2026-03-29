@@ -14,7 +14,7 @@ exports.createBarco = async function (_nome, _cor) {
 }
 exports.getBarcosByID = async function (_id) {
     const result = await barcosRepository.getBarcosByID(_id);
-    if (!result || result.length === 0)
+    if (!result)
         return null;
     return result;
 }
