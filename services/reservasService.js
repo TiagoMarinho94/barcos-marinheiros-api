@@ -3,8 +3,8 @@ const marinheirosRepository = require('../repositories/marinheirosRepository');
 const barcosRepository = require('../repositories/barcosRepository');
 const ReservasDTO = require('../models/reservas_dto');
 
-exports.getReservasByIDMarinheiro = async function (id) {
-    const result = await reservasRepository.getReservasByIDMarinheiro(id);
+exports.getReservasByIDMarinheiro = async function (_id) {
+    const result = await reservasRepository.getReservasByIDMarinheiro(_id);
     if (!result || result.length === 0)
         return null;
     return result.map(item => ReservasDTO.toDetail(item));
