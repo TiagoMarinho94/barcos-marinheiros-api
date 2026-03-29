@@ -33,7 +33,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/marinheiros/22",
+          "raw": "http://localhost:8080/api/marinheiros/96",
           "protocol": "http",
           "host": [
             "localhost"
@@ -42,7 +42,7 @@
           "path": [
             "api",
             "marinheiros",
-            "22"
+            "96"
           ]
         }
       },
@@ -184,7 +184,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/reservas/marinheiro/22",
+          "raw": "http://localhost:8080/api/reservas/marinheiro/96",
           "protocol": "http",
           "host": [
             "localhost"
@@ -194,7 +194,7 @@
             "api",
             "reservas",
             "marinheiro",
-            "22"
+            "96"
           ]
         }
       },
@@ -216,6 +216,35 @@
             "api",
             "barcos",
             "105"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "US010-api/reservas",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"idmarinheiro\": 96,\r\n    \"idbarco\": 105,\r\n    \"data\": \"2026-03-31\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/reservas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "reservas"
           ]
         }
       },
