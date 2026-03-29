@@ -12,10 +12,12 @@ exports.getReservasByIDMarinheiro = async function (id) {
 exports.createReserva = async function (_idmarinheiro, _idbarco, _data) {
     //procurar se marinheiro existe com função que já existe
     const mar = await marinheirosRepository.getMarinheirosByID(_idmarinheiro)
-    if (!mar) return -1;
+    if (!mar)
+        return -1;
     //procurar se barco existe com função que já existe
     const bar = await barcosRepository.getBarcosByID(_idbarco)
-    if (!bar) return -2;
+    if (!bar)
+        return -2;
     //Se ambos existirem posso criar a reserva
     //fiz isto pois como alterar a base de dados não faz parte deste trabalho, assim garante que a logica do negocio
     const result = await reservasRepository.createReserva(_idmarinheiro, _idbarco, _data);
