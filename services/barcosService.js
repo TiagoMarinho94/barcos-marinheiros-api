@@ -18,3 +18,9 @@ exports.getBarcosByID = async function (_id) {
         return null;
     return result;
 }
+exports.getBarcosDisponibilidade = async function (_data) {
+    const result = await barcosRepository.getBarcosDisponibilidade(_data);
+    if (!result || result.length === 0)
+        return null;
+    return result;
+}
