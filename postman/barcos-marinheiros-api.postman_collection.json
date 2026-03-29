@@ -294,6 +294,27 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "US006-api/marinheiros/:id",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/marinheiros/96",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "marinheiros",
+            "96"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
