@@ -33,3 +33,14 @@ exports.deleteReserva = async function (_idmarinheiro, _idbarco, _data){
         if (lig) await lig.close();
     }
 }
+exports.getReservasByDisponibilidade = async function (_data){
+    let lig;
+    try{
+        lig = await OracleDB.getConnection(dbConfig);
+        const dataFormatada = new Date(_data).toISOString().split('T')[0];
+        const result = await lig.execute('SELECT ID_BARCO, NOME AS NOME_BARCO FROM BARCOS WHERE ID_BARCO NOT IN (SELEC ID_BARCO FROM RESERVAS WHERE TRUNC(DATA)= TO_DATE(:1, \'YYYY-MM-DD\')', [dataFormatada], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        return result.rows;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
