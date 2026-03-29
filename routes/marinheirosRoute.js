@@ -25,4 +25,12 @@ router.patch('/:id',
     }),
 ctr.updateMarinheirosByID);
 
+router.delete('/:id',
+    celebrate({
+        params: Joi.object({
+            id: Joi.number().min(1).required()
+        })
+    }),
+ctr.deleteMarinheiro);
+
 module.exports = router;
