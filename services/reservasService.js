@@ -25,3 +25,9 @@ exports.createReserva = async function (_idmarinheiro, _idbarco, _data) {
         return null;
     return result;
 }
+exports.deleteReserva = async function (_idmarinheiro, _idbarco, _data) {
+    const result = await reservasRepository.deleteReserva(_idmarinheiro, _idbarco, _data);
+    if (result === 0)
+        return -1; // não encontrou a reserva ou data já passou
+    return result;
+}
