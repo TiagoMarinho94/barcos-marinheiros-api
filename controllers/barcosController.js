@@ -33,3 +33,14 @@ exports.getBarcosByID = async function (req, res) {
         res.status(500).json({ error: err.message });
     }
 }
+exports.getBarcosDisponibilidade = async function (req, res) {
+    try {
+        var result = await BarcosSrv.getBarcosDisponibilidade(req.params.data);
+        if (!result)
+            return res.status(404).json({ error: 'Não existem barcos diponiveis nesse dia' });
+        res.json(result);
+    }
+    catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
