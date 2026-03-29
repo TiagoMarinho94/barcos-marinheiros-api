@@ -28,7 +28,7 @@
       "response": []
     },
     {
-      "name": "US004-api/marinheiros/22",
+      "name": "US004-api/marinheiros/:id",
       "request": {
         "method": "GET",
         "header": [],
@@ -100,7 +100,7 @@
       "response": []
     },
     {
-      "name": "US005-api/marinheiros/96",
+      "name": "US005-api/marinheiros/:id",
       "request": {
         "method": "PATCH",
         "header": [],
@@ -195,6 +195,27 @@
             "reservas",
             "marinheiro",
             "22"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "US_extra-api/barcos/:id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/barcos/105",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "barcos",
+            "105"
           ]
         }
       },
