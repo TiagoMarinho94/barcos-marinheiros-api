@@ -29,8 +29,8 @@ exports.getBarcosByID = async function (id) {
     let lig;
     try {
         lig = await OracleDB.getConnection(dbConfig);
-        const result = await lig.execute('SELECT * FROM BARCOS WHERE ID_MARINHEIRO = :1', [id], { outFormat: OracleDB.OUT_FORMAT_OBJECT});
-        return result.rows;
+        const result = await lig.execute('SELECT * FROM BARCOS WHERE ID_BARCO = :1', [id], { outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        return result.rows[0];
     } finally {
         if (lig) await lig.close();
     }
