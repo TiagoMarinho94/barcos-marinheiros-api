@@ -28,3 +28,17 @@ exports.createReserva = async function (req,res) {
         res.status(500).json({error: err.message});
     }
 }
+exports.deleteReserva = async function (req,res) {
+    try {
+        var result = await ReservasSrv.deleteReserva(req.params.idmarinheiro,req.params.idbarco,req.params.data);
+        //verificar se conseguiu apagar a reserva
+        if(result === -1)
+            return res.status(404).json({ error: 'Não é possível apagar reservas passadas ou reserva não encontrada'});
+        if(!result)
+            return res.status(503).json({ error: 'Erro ao apagar reserva'});
+        res.status(204).json({success: 'Reserva apagada com sucesso'});
+    }
+    catch (err){
+        res.status(500).json({error: err.message});
+    }
+}
