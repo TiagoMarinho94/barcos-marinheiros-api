@@ -56,3 +56,14 @@ exports.updateMarinheirosByID = async function (id, _classif){
         if (lig) await lig.close();
     }
 }
+exports.deleteMarinheiro = async function (_idmarinheiro){
+    let lig;
+    try{
+        lig = await OracleDB.getConnection(dbConfig);
+        const result = await lig.execute('DELETE FROM MARINHEIROS WHERE ID_MARINHEIRO= :1', [_idmarinheiro], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        await lig.commit();
+        return result.rowsAffected;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
