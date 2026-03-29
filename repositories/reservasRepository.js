@@ -10,3 +10,14 @@ exports.getReservasByIDMarinheiro = async function (id){
         if (lig) await lig.close();
     }
 }
+exports.createReserva = async function (_idmarinheiro, _idbarco, _data){
+    let lig;
+    try{
+        lig = await OracleDB.getConnection(dbConfig);
+        const result = await lig.execute('INSERT INTO RESERVAS (ID_MARINHEIRO, ID_BARCO, DATA) VALUES (:1, :2, :3)', [_idmarinheiro, _idbarco, _data], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        await lig.commit();
+        return result.rowsAffected;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
