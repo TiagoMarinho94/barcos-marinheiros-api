@@ -5,4 +5,14 @@ const ctr = require('../controllers/reservasController');
 
 router.get('/marinheiro/:id', ctr.getReservasByIDMarinheiro);
 
+router.post('/',
+    celebrate({
+        body: Joi.object({
+            idmarinheiro: Joi.number().min(1).required(),
+            idbarco: Joi.number().min(1).required(),
+            data: Joi.date().required()
+        })
+    }),
+ctr.createReserva);
+
 module.exports = router;
