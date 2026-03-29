@@ -249,6 +249,29 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "US012-api/reservas/:id_marinheiro/:id_barco/:data",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/reservas/96/105/2026-03-31",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "reservas",
+            "96",
+            "105",
+            "2026-03-31"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }

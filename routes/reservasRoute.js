@@ -20,7 +20,7 @@ router.delete('/:idmarinheiro/:idbarco/:data',
         params: Joi.object({
             idmarinheiro: Joi.number().min(1).required(),
             idbarco: Joi.number().min(1).required(),
-            data: Joi.date().required()
+            data: Joi.string().required()
         })
     }),
 ctr.deleteReserva);

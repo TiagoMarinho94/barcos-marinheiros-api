@@ -25,7 +25,8 @@ exports.deleteReserva = async function (_idmarinheiro, _idbarco, _data){
     let lig;
     try{
         lig = await OracleDB.getConnection(dbConfig);
-        const result = await lig.execute('DELETE FROM RESERVAS WHERE ID_MARINHEIRO= :1 AND ID_BARCO = :2 AND TRUNC(DATA) =TO_DATE(:3, \'YYYY-MM-DD\') AND DATA > SYSDATE', [_idmarinheiro, _idbarco, _data], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        const dataFormatada = new Date(_data).toISOString().split('T')[0];
+        const result = await lig.execute('DELETE FROM RESERVAS WHERE ID_MARINHEIRO= :1 AND ID_BARCO = :2 AND TRUNC(DATA) =TO_DATE(:3, \'YYYY-MM-DD\') AND TRUNC(DATA) > TRUNC(SYSDATE)', [_idmarinheiro, _idbarco, dataFormatada], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
         await lig.commit();
         return result.rowsAffected;
     } finally {
