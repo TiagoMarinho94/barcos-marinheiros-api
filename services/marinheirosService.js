@@ -30,3 +30,14 @@ exports.updateMarinheirosByID = async function (id,_classif) {
         return null;
     return result;
 }
+exports.deleteMarinheiro = async function (_idmarinheiro) {
+    //procurar se marinheiro tem reservas
+    const reserva = await reservasRepository.getReservasByIDMarinheiro(_idmarinheiro)
+    if (reserva && reservas.length > 0)
+        return -1; // se tiver dá -1 para saber que nao posso apagar
+    //Se nao tiver nenhuma reserva, posso apagar
+    const result = await marinheirosRepository.deleteMarinheiro(_idmarinheiro);
+    if (!result)
+        return null;
+    return result;
+}
