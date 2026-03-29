@@ -272,6 +272,28 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "US009-api/barcos/disponibilidade/:data",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/barcos/disponibilidade/2026-03-30",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "barcos",
+            "disponibilidade",
+            "2026-03-30"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
