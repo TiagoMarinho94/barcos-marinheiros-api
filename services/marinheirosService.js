@@ -1,4 +1,5 @@
 const marinheirosRepository = require('../repositories/marinheirosRepository');
+const reservasRepository = require('../repositories/reservasRepository');
 
 exports.getAllMarinheiros = async function () {
     const result = await marinheirosRepository.getAllMarinheiros();
