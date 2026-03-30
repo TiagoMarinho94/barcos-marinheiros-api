@@ -16,4 +16,14 @@ router.post('/',
     }),
 ctr.createBarco);
 
+router.patch('/:id',
+    celebrate({
+        body: Joi.object({
+            nome: Joi.string().min(2).max(50).optional(),
+            cor:Joi.string().min(2).max(10).optional()
+        })
+        .or('nome','cor')
+    }),
+ctr.updateBarcoByID);
+
 module.exports = router;
