@@ -19,8 +19,8 @@ ctr.createBarco);
 router.patch('/:id',
     celebrate({
         body: Joi.object({
-            nome: Joi.string().min(2).max(50).optional(),
-            cor:Joi.string().min(2).max(10).optional()
+            nome: Joi.string().min(2).max(20).optional(),
+            cor: Joi.string().min(2).max(10).optional()
         })
         .or('nome','cor')
     }),
