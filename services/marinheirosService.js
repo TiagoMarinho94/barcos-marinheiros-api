@@ -42,3 +42,9 @@ exports.deleteMarinheiro = async function (_idmarinheiro) {
         return null;
     return result;
 }
+exports.updateMarinheiro = async function (id, _nome, _idade) {
+    const result = await marinheirosRepository.updateMarinheiro(id, _nome, _idade);
+    if (!result || result === 0)
+        return null;
+    return result;
+}
