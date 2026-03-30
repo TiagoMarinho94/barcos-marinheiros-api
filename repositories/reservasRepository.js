@@ -76,16 +76,3 @@ exports.getReservasByIDBarco = async function (_id){
         if (lig) await lig.close();
     }
 }
-exports.updateReserva = async function (_idmarinheiro, _idbarco, _dataAtual, _dataNova){
-    let lig;
-    try{
-        lig = await OracleDB.getConnection(dbConfig);
-        const dataAtualFormatada = new Date(_dataAtual).toISOString().split('T')[0];
-        const dataNovaFormatada = new Date(_dataNova).toISOString().split('T')[0];
-        const result = await lig.execute('UPDATE RESERVAS SET DATA = TO_DATE(:1, \'YYYY-MM-DD\') WHERE ID_MARINHEIRO = :2 AND ID_BARCO = :3 AND TRUNC(DATA) = TO_DATE(:4, \'YYYY-MM-DD\' AND AND TRUNC(DATA) > AND TRUNC(SYSDATE))', [dataNovaFormatada,_idmarinheiro, _idbarco, dataAtualFormatada], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
-        await lig.commit();
-        return result.rowsAffected;
-    } finally {
-        if (lig) await lig.close();
-    }
-}
