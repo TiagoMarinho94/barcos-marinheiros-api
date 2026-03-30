@@ -1,4 +1,5 @@
 const barcosRepository = require('../repositories/barcosRepository');
+const reservasRepository = require('../repositories/reservasRepository');
 
 exports.getAllBarcos = async function () {
     const result = await barcosRepository.getAllBarcos();
@@ -27,6 +28,17 @@ exports.getBarcosDisponibilidade = async function (_data) {
 exports.updateBarcoByID = async function (id, _nome, _cor) {
     const result = await barcosRepository.updateBarcoByID(id, _nome, _cor);
     if (!result || result === 0)
+        return null;
+    return result;
+}
+exports.deleteBarco = async function (_idbarco) {
+    //procurar se barco tem reservas
+    const reserva = await reservasRepository.getReservasByIDBarco(_idbarco)
+    if (reserva && reserva.length > 0)
+        return -1; // se tiver dá -1 para saber que nao posso apagar
+    //Se nao tiver nenhuma reserva, posso apagar
+    const result = await barcosRepository.deleteBarco(_idbarco);
+    if (!result)
         return null;
     return result;
 }
