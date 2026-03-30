@@ -46,3 +46,14 @@ exports.getBarcosDisponibilidade = async function (_data){
         if (lig) await lig.close();
     }
 }
+exports.updateBarcoByID = async function (id, _nome, _cor){
+    let lig;
+    try{
+        lig = await OracleDB.getConnection(dbConfig);
+        const result = await lig.execute('UPDATE BARCOS SET NOME = COALESCE(:1, NOME), COR = COALESCE(:2, COR) WHERE ID_BARCO = :3', [_nome, _cor,id], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        await lig.commit();
+        return result.rowsAffected;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
