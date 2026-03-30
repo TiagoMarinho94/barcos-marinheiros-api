@@ -8,7 +8,7 @@
   },
   "item": [
     {
-      "name": "US002-api/marinheiros",
+      "name": "US002-/api/marinheiros",
       "request": {
         "method": "GET",
         "header": [],
@@ -28,7 +28,7 @@
       "response": []
     },
     {
-      "name": "US004-api/marinheiros/:id",
+      "name": "US004-/api/marinheiros/:id",
       "request": {
         "method": "GET",
         "header": [],
@@ -49,7 +49,7 @@
       "response": []
     },
     {
-      "name": "US003-api/marinheiros/classificacao/8",
+      "name": "US003-/api/marinheiros/classificacao/8",
       "request": {
         "method": "GET",
         "header": [],
@@ -71,7 +71,7 @@
       "response": []
     },
     {
-      "name": "US001-api/marinheiros",
+      "name": "US001-/api/marinheiros",
       "request": {
         "method": "POST",
         "header": [],
@@ -100,7 +100,7 @@
       "response": []
     },
     {
-      "name": "US005-api/marinheiros/:id",
+      "name": "US005-/api/marinheiros/:id",
       "request": {
         "method": "PATCH",
         "header": [],
@@ -130,7 +130,7 @@
       "response": []
     },
     {
-      "name": "US008-api/barcos",
+      "name": "US008-/api/barcos",
       "request": {
         "method": "GET",
         "header": [],
@@ -150,7 +150,7 @@
       "response": []
     },
     {
-      "name": "US007-api/barcos",
+      "name": "US007-/api/barcos",
       "request": {
         "method": "POST",
         "header": [],
@@ -179,7 +179,7 @@
       "response": []
     },
     {
-      "name": "US011-api/reservas/marinheiro/:id",
+      "name": "US011-/api/reservas/marinheiro/:id",
       "request": {
         "method": "GET",
         "header": [],
@@ -201,7 +201,7 @@
       "response": []
     },
     {
-      "name": "US_extra-api/barcos/:id",
+      "name": "EXTRA-/api/barcos/:id",
       "request": {
         "method": "GET",
         "header": [],
@@ -222,7 +222,7 @@
       "response": []
     },
     {
-      "name": "US010-api/reservas",
+      "name": "US010-/api/reservas",
       "request": {
         "method": "POST",
         "header": [],
@@ -251,7 +251,7 @@
       "response": []
     },
     {
-      "name": "US012-api/reservas/:id_marinheiro/:id_barco/:data",
+      "name": "US012-/api/reservas/:idmarinheiro/:idbarco/:data",
       "request": {
         "method": "DELETE",
         "header": [],
@@ -274,7 +274,7 @@
       "response": []
     },
     {
-      "name": "US009-api/barcos/disponibilidade/:data",
+      "name": "US009-/api/barcos/disponibilidade/:data",
       "request": {
         "method": "GET",
         "header": [],
@@ -296,7 +296,7 @@
       "response": []
     },
     {
-      "name": "US006-api/marinheiros/:id",
+      "name": "US006-/api/marinheiros/:id",
       "request": {
         "method": "DELETE",
         "header": [],
@@ -311,6 +311,26 @@
             "api",
             "marinheiros",
             "96"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EXTRA-/api/reservas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/reservas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "reservas"
           ]
         }
       },
