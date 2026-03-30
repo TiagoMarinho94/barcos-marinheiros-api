@@ -44,3 +44,14 @@ exports.getBarcosDisponibilidade = async function (req, res) {
         res.status(500).json({ error: err.message });
     }
 }
+exports.updateBarcoByID = async function (req,res) {
+    try {
+        var result = await BarcosSrv.updateBarcoByID(req.params.id,req.body.nome,req.body.cor);
+        if(!result)
+            return res.status(404).json({ error: 'Barco não encontrado'});
+        res.sendStatus(204);
+    }
+    catch (err){
+        res.status(500).json({error: err.message});
+    }
+}
