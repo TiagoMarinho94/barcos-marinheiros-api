@@ -10,14 +10,22 @@ exports.getReservasByIDMarinheiro = async function (_id) {
     return result.map(item => ReservasDTO.toDetail(item));
 }
 exports.createReserva = async function (_idmarinheiro, _idbarco, _data) {
-    //procurar se marinheiro existe com função que já existe
-    const mar = await marinheirosRepository.getMarinheirosByID(_idmarinheiro)
+    //verificar se marinheiro existe com função já existente
+    const mar = await marinheirosRepository.getMarinheirosByID(_idmarinheiro);
     if (!mar)
         return -1;
-    //procurar se barco existe com função que já existe
-    const bar = await barcosRepository.getBarcosByID(_idbarco)
+    //verificar se barco existe com função já existente
+    const bar = await barcosRepository.getBarcosByID(_idbarco);
     if (!bar)
         return -2;
+    //verificar se marinheiro tem reserva nessa data
+    const marOcupado = await reservasRepository.getReservaByIDMarinheiroData(_idmarinheiro, _data);
+    if(marOcupado && marOcupado.length > 0)
+        return -3;
+    //verificar se barco tem reserva nessa data
+    const barOcupado = await reservasRepository.getReservaByIDBarcoData(_idbarco, _data);
+    if(barOcupado && barOcupado.length > 0)
+        return -4;
     //Se ambos existirem posso criar a reserva
     //fiz isto pois como alterar a base de dados não faz parte deste trabalho, assim garante que a logica do negocio
     const result = await reservasRepository.createReserva(_idmarinheiro, _idbarco, _data);
