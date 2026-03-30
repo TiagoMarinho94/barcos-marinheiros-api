@@ -45,3 +45,9 @@ exports.getAllReservas = async function () {
         return null;
     return result.map(item => ReservasDTO.toDetail(item));
 }
+exports.getReservasByIDBarco = async function (_id) {
+    const result = await reservasRepository.getReservasByIDBarco(_id);
+    if (!result || result.length === 0)
+        return null;
+    return result.map(item => ReservasDTO.toDetail(item));
+}
