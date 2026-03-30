@@ -56,3 +56,13 @@ exports.getReservaByIDBarcoData = async function (_idbarco, _data){
         if (lig) await lig.close();
     }
 }
+exports.getAllReservas = async function (){
+    let lig;
+    try{
+        lig = await OracleDB.getConnection(dbConfig);
+        const result = await lig.execute('SELECT R.ID_MARINHEIRO, M.NOME AS NOME_MARINHEIRO, R.ID_BARCO, B.NOME AS NOME_BARCO, R.DATA FROM RESERVAS R JOIN MARINHEIROS M ON R.ID_MARINHEIRO = M.ID_MARINHEIRO JOIN BARCOS B ON R.ID_BARCO = B.ID_BARCO', [], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        return result.rows;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
