@@ -57,3 +57,14 @@ exports.updateBarcoByID = async function (id, _nome, _cor){
         if (lig) await lig.close();
     }
 }
+exports.deleteBarco = async function (_idbarco){
+    let lig;
+    try{
+        lig = await OracleDB.getConnection(dbConfig);
+        const result = await lig.execute('DELETE FROM BARCOS WHERE ID_BARCO= :1', [_idbarco], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        await lig.commit();
+        return result.rowsAffected;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
