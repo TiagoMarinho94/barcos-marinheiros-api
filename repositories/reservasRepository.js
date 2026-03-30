@@ -33,3 +33,23 @@ exports.deleteReserva = async function (_idmarinheiro, _idbarco, _data){
         if (lig) await lig.close();
     }
 }
+exports.getReservaByIDMarinheiroData = async function (_idmarinheiro, _data){
+    let lig;
+    try{
+        lig = await OracleDB.getConnection(dbConfig);
+        const result = await lig.execute('SELECT * FROM RESERVAS WHERE ID_MARINHEIRO = :1 AND TRUNC(DATA) = TO_DATE(:2, \'YYYY-MM-DD\')', [_idmarinheiro, _data], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        return result.rows;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
+exports.getReservaByIDBarcosData = async function (_idbarco, _data){
+    let lig;
+    try{
+        lig = await OracleDB.getConnection(dbConfig);
+        const result = await lig.execute('SELECT * FROM RESERVAS WHERE ID_BARCO = :1 AND TRUNC(DATA) = TO_DATE(:2, \'YYYY-MM-DD\')', [_idbarco, _data], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        return result.rows;
+    } finally {
+        if (lig) await lig.close();
+    }
+}
