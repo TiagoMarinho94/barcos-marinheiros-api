@@ -39,3 +39,9 @@ exports.deleteReserva = async function (_idmarinheiro, _idbarco, _data) {
         return -1; // não encontrou a reserva ou data já passou
     return result;
 }
+exports.getAllReservas = async function () {
+    const result = await reservasRepository.getAllReservas();
+    if (!result || result.length === 0)
+        return null;
+    return result.map(item => ReservasDTO.toDetail(item));
+}
