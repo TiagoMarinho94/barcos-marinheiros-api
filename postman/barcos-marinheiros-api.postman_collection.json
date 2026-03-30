@@ -387,6 +387,27 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "EXTRA-/api/barcos/:id",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/barcos/106",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "barcos",
+            "106"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }

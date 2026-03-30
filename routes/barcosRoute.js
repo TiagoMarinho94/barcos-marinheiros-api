@@ -26,4 +26,12 @@ router.patch('/:id',
     }),
 ctr.updateBarcoByID);
 
+router.delete('/:id',
+    celebrate({
+        params: Joi.object({
+            id: Joi.number().min(1).required()
+        })
+    }),
+ctr.deleteBarco);
+
 module.exports = router;
