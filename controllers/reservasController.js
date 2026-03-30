@@ -59,3 +59,14 @@ exports.getAllReservas = async function (req, res) {
         res.status(500).json({ error: err.message });
     }
 }
+exports.getReservasByIDBarco = async function (req, res) {
+    try {
+        var result = await ReservasSrv.getReservasByIDBarco(req.params.id);
+        if (!result)
+            return res.status(404).json({ error: 'Não foram encontrados reservas efetuadas para esse barco' });
+        res.json(result);
+    }
+    catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
