@@ -43,7 +43,7 @@ exports.getReservaByIDMarinheiroData = async function (_idmarinheiro, _data){
         if (lig) await lig.close();
     }
 }
-exports.getReservaByIDBarcosData = async function (_idbarco, _data){
+exports.getReservaByIDBarcoData = async function (_idbarco, _data){
     let lig;
     try{
         lig = await OracleDB.getConnection(dbConfig);
