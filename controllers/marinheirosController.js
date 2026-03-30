@@ -69,3 +69,14 @@ exports.deleteMarinheiro = async function (req,res) {
         res.status(500).json({error: err.message});
     }
 }
+exports.updateMarinheiro = async function (req, res) {
+    try {
+        var result = await MarinheirosSrv.updateMarinheiro( req.params.id, req.body.nome, req.body.idade);
+        if (!result)
+            return res.status(404).json({ error: 'Marinheiro não encontrado' });
+        res.sendStatus(204);
+    }
+    catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
