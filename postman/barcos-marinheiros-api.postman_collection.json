@@ -335,6 +335,28 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "EXTRA-/api/reservas/barco/:id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/reservas/barco/105",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "reservas",
+            "barco",
+            "105"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
