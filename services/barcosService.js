@@ -24,3 +24,9 @@ exports.getBarcosDisponibilidade = async function (_data) {
         return null;
     return result;
 }
+exports.updateBarcoByID = async function (id, _nome, _cor) {
+    const result = await barcosRepository.updateBarcoByID(id, _nome, _cor);
+    if (!result || result === 0)
+        return null;
+    return result;
+}
