@@ -20,8 +20,11 @@ ctr.createMarinheiro);
 router.patch('/:id',
     celebrate({
         body: Joi.object({
-            classif: Joi.number().min(1).max(10).required()
+            classif: Joi.number().min(1).max(10).optional(),
+            nome: Joi.string().min(2).max(30).optional(),
+            idade: Joi.number().min(1).optional()
         })
+        .or('classif', 'nome', 'idade')
     }),
 ctr.updateMarinheirosByID);
 

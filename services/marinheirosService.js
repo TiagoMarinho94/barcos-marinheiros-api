@@ -25,8 +25,8 @@ exports.createMarinheiro = async function (_nome, _classif, _idade) {
         return null;
     return result;
 }
-exports.updateMarinheirosByID = async function (id,_classif) {
-    const result = await marinheirosRepository.updateMarinheirosByID(id,_classif);
+exports.updateMarinheirosByID = async function (id, _nome, _idade, _classif) {
+    const result = await marinheirosRepository.updateMarinheirosByID(id, _nome, _idade, _classif);
     if (!result || result === 0)
         return null;
     return result;
@@ -39,12 +39,6 @@ exports.deleteMarinheiro = async function (_idmarinheiro) {
     //Se nao tiver nenhuma reserva, posso apagar
     const result = await marinheirosRepository.deleteMarinheiro(_idmarinheiro);
     if (!result)
-        return null;
-    return result;
-}
-exports.updateMarinheiro = async function (id, _nome, _idade) {
-    const result = await marinheirosRepository.updateMarinheiro(id, _nome, _idade);
-    if (!result || result === 0)
         return null;
     return result;
 }

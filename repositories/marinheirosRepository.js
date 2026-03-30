@@ -45,11 +45,11 @@ exports.createMarinheiro = async function (_nome, _classif, _idade){
         if (lig) await lig.close();
     }
 }
-exports.updateMarinheirosByID = async function (id, _classif){
+exports.updateMarinheirosByID = async function (id, _nome, _idade, _classif){
     let lig;
     try{
         lig = await OracleDB.getConnection(dbConfig);
-        const result = await lig.execute('UPDATE MARINHEIROS SET CLASSIFICACAO = :1 WHERE ID_MARINHEIRO = :2', [_classif, id], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        const result = await lig.execute(`UPDATE MARINHEIROS SET CLASSIFICACAO = COALESCE(:1, CLASSIFICACAO), NOME = COALESCE(:2, NOME), IDADE = COALESCE(:3, IDADE) WHERE ID_MARINHEIRO = :4`, [_classif, _nome, _idade, id], [_classif, id], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
         await lig.commit();
         return result.rowsAffected;
     } finally {
@@ -61,17 +61,6 @@ exports.deleteMarinheiro = async function (_idmarinheiro){
     try{
         lig = await OracleDB.getConnection(dbConfig);
         const result = await lig.execute('DELETE FROM MARINHEIROS WHERE ID_MARINHEIRO= :1', [_idmarinheiro], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
-        await lig.commit();
-        return result.rowsAffected;
-    } finally {
-        if (lig) await lig.close();
-    }
-}
-exports.updateMarinheiro = async function (id, _nome, _idade) {
-    let lig;
-    try {
-        lig = await OracleDB.getConnection(dbConfig);
-        const result = await lig.execute('UPDATE MARINHEIROS SET NOME = COALESCE(:1, NOME), IDADE = COALESCE(:2, IDADE) WHERE ID_MARINHEIRO = :3', [_nome, _idade, id], { outFormat: OracleDB.OUT_FORMAT_OBJECT });
         await lig.commit();
         return result.rowsAffected;
     } finally {
