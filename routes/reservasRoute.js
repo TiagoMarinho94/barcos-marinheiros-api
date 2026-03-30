@@ -4,6 +4,7 @@ var { celebrate, Joi } = require('celebrate');
 const ctr = require('../controllers/reservasController');
 
 router.get('/', ctr.getAllReservas);
+router.get('/barco/:id', ctr.getReservasByIDBarco);
 router.get('/marinheiro/:id', ctr.getReservasByIDMarinheiro);
 
 router.post('/',
