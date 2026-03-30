@@ -55,3 +55,17 @@ exports.updateBarcoByID = async function (req,res) {
         res.status(500).json({error: err.message});
     }
 }
+exports.deleteBarco = async function (req,res) {
+    try {
+        var result = await BarcosSrv.deleteBarco(req.params.id);
+        //se barco tem reservas
+        if(result === -1)
+            return res.status(409).json({ error: 'Barco tem reservas, não é possível apagar'});
+        if(!result)
+            return res.status(404).json({ error: 'Barco não encontrado' });
+        res.sendStatus(204);
+    }
+    catch (err){
+        res.status(500).json({error: err.message});
+    }
+}
