@@ -14,7 +14,8 @@ exports.createReserva = async function (_idmarinheiro, _idbarco, _data){
     let lig;
     try{
         lig = await OracleDB.getConnection(dbConfig);
-        const result = await lig.execute('INSERT INTO RESERVAS (ID_MARINHEIRO, ID_BARCO, DATA) VALUES (:1, :2, :3)', [_idmarinheiro, _idbarco, _data], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        const dataFormatada = new Date(_data).toISOString().split('T')[0];
+        const result = await lig.execute('INSERT INTO RESERVAS (ID_MARINHEIRO, ID_BARCO, DATA) VALUES (:1, :2, TO_DATE(:3, \'YYYY-MM-DD\'))', [_idmarinheiro, _idbarco, dataFormatada], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
         await lig.commit();
         return result.rowsAffected;
     } finally {
@@ -37,7 +38,8 @@ exports.getReservaByIDMarinheiroData = async function (_idmarinheiro, _data){
     let lig;
     try{
         lig = await OracleDB.getConnection(dbConfig);
-        const result = await lig.execute('SELECT * FROM RESERVAS WHERE ID_MARINHEIRO = :1 AND TRUNC(DATA) = TO_DATE(:2, \'YYYY-MM-DD\')', [_idmarinheiro, _data], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        const dataFormatada = new Date(_data).toISOString().split('T')[0];
+        const result = await lig.execute('SELECT * FROM RESERVAS WHERE ID_MARINHEIRO = :1 AND TRUNC(DATA) = TO_DATE(:2, \'YYYY-MM-DD\')', [_idmarinheiro, dataFormatada], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
         return result.rows;
     } finally {
         if (lig) await lig.close();
@@ -47,7 +49,8 @@ exports.getReservaByIDBarcoData = async function (_idbarco, _data){
     let lig;
     try{
         lig = await OracleDB.getConnection(dbConfig);
-        const result = await lig.execute('SELECT * FROM RESERVAS WHERE ID_BARCO = :1 AND TRUNC(DATA) = TO_DATE(:2, \'YYYY-MM-DD\')', [_idbarco, _data], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        const dataFormatada = new Date(_data).toISOString().split('T')[0];
+        const result = await lig.execute('SELECT * FROM RESERVAS WHERE ID_BARCO = :1 AND TRUNC(DATA) = TO_DATE(:2, \'YYYY-MM-DD\')', [_idbarco, dataFormatada], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
         return result.rows;
     } finally {
         if (lig) await lig.close();

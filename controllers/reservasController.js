@@ -42,7 +42,7 @@ exports.deleteReserva = async function (req,res) {
             return res.status(404).json({ error: 'Não é possível apagar reservas passadas ou reserva não encontrada'});
         if(!result)
             return res.status(503).json({ error: 'Erro ao apagar reserva'});
-        res.status(204).json({success: 'Reserva apagada com sucesso'});
+        res.sendStatus(204);
     }
     catch (err){
         res.status(500).json({error: err.message});
