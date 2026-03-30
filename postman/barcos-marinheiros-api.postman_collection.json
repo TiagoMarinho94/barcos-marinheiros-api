@@ -357,6 +357,36 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "EXTRA-/api/barcos/:id",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"Barco do Tiago André\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/barcos/105",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "barcos",
+            "105"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
