@@ -49,7 +49,7 @@ exports.updateMarinheirosByID = async function (id, _nome, _idade, _classif){
     let lig;
     try{
         lig = await OracleDB.getConnection(dbConfig);
-        const result = await lig.execute(`UPDATE MARINHEIROS SET CLASSIFICACAO = COALESCE(:1, CLASSIFICACAO), NOME = COALESCE(:2, NOME), IDADE = COALESCE(:3, IDADE) WHERE ID_MARINHEIRO = :4`, [_classif, _nome, _idade, id], [_classif, id], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
+        const result = await lig.execute(`UPDATE MARINHEIROS SET CLASSIFICACAO = COALESCE(:1, CLASSIFICACAO), NOME = COALESCE(:2, NOME), IDADE = COALESCE(:3, IDADE) WHERE ID_MARINHEIRO = :4`, [_classif, _nome, _idade, id], {outFormat: OracleDB.OUT_FORMAT_OBJECT});
         await lig.commit();
         return result.rowsAffected;
     } finally {
