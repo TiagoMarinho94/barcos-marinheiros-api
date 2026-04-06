@@ -7,6 +7,10 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
+// CORS ========================================================
+const cors = require('cors');
+app.use(cors());
+
 // Middleware ==================================================
 var mWare = require('./middleware');
 app.use(mWare);
