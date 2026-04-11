@@ -28,6 +28,10 @@ app.use('/api/barcos', BarcosRouter);
 var ReservasRouter = require('./routes/reservasRoute');
 app.use('/api/reservas', ReservasRouter);
 
+// Celebrate error handle =====================================
+const { errors } = require('celebrate');
+app.use(errors());
+
 app.get(/.*/, (req,res) => {                     // 404 handling
   res.status(404).send('Endpoint not found.')
 });

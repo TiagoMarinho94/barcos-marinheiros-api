@@ -9,6 +9,41 @@
   "item": [
     {
       "name": "US002-/api/marinheiros",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Resposta é array\", function() {\r",
+              "    pm.expect(pm.response.json()).to.be.an('array');\r",
+              "});\r",
+              "pm.test(\"Array não está vazio\", function() {\r",
+              "    pm.expect(pm.response.json().length).to.be.above(0);\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -29,6 +64,30 @@
     },
     {
       "name": "US004-/api/marinheiros/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Resposta é objecto\", function() {\r",
+              "    pm.expect(pm.response.json()).to.be.an('object');\r",
+              "});\r",
+              "pm.test(\"Tem ID_MARINHEIRO\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('ID_MARINHEIRO');\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -49,7 +108,72 @@
       "response": []
     },
     {
+      "name": "US004-/api/marinheiros/:id-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/marinheiros/1000",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "marinheiros",
+            "1000"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "US003-/api/marinheiros/classificacao/8",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Resposta é array\", function() {\r",
+              "    pm.expect(pm.response.json()).to.be.an('array');\r",
+              "});\r",
+              "pm.test(\"Todos têm classificação 8\", function() {\r",
+              "    pm.response.json().forEach(m => {\r",
+              "        pm.expect(m.CLASSIFICACAO).to.equal(8);\r",
+              "    });\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -71,13 +195,121 @@
       "response": []
     },
     {
+      "name": "US003-/api/marinheiros/classificacao/8-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/marinheiros/classificacao/80",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "marinheiros",
+            "classificacao",
+            "80"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "US001-/api/marinheiros",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 201\", function() {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "pm.test(\"Tem campo success\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('success');\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"nome\": \"Tiago\",\r\n    \"classif\": 10,\r\n    \"idade\": 31\r\n}",
+          "raw": "{\r\n    \"nome\": \"Carina\",\r\n    \"classif\": 8,\r\n    \"idade\": 27\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/marinheiros",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "marinheiros"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "US001-/api/marinheiros-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 400\", function() {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"A\",\r\n    \"classif\": 8,\r\n    \"idade\": 27\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -101,6 +333,27 @@
     },
     {
       "name": "US005-EXTRA-/api/marinheiros/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 204\", function() {\r",
+              "    pm.response.to.have.status(204);\r",
+              "});\r",
+              "pm.test(\"Sem body\", function() {\r",
+              "    pm.expect(pm.response.text()).to.be.empty;\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "PATCH",
         "header": [],
@@ -130,7 +383,79 @@
       "response": []
     },
     {
+      "name": "US005-EXTRA-/api/marinheiros/:id-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"classif\": 10,\r\n    \"idade\": 32\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/marinheiros/9600",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "marinheiros",
+            "9600"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "US008-/api/barcos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Resposta é array\", function() {\r",
+              "    pm.expect(pm.response.json()).to.be.an('array');\r",
+              "});\r",
+              "pm.test(\"Array não está vazio\", function() {\r",
+              "    pm.expect(pm.response.json().length).to.be.above(0);\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -151,12 +476,80 @@
     },
     {
       "name": "US007-/api/barcos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 201\", function() {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "pm.test(\"Tem campo success\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('success');\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"nome\": \"Barco do Tiago\",\r\n    \"cor\": \"vermelho\"\r\n}",
+          "raw": "{\r\n    \"nome\": \"Optimus Prime\",\r\n    \"cor\": \"vermelho\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/barcos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "barcos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "US007-/api/barcos-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 400\", function() {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"S\",\r\n    \"cor\": \"S\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -180,6 +573,32 @@
     },
     {
       "name": "US011-/api/reservas/marinheiro/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Resposta é array\", function() {\r",
+              "    pm.expect(pm.response.json()).to.be.an('array');\r",
+              "});\r",
+              "pm.test(\"Todas as reservas são do marinheiro 96\", function() {\r",
+              "    pm.response.json().forEach(r => {\r",
+              "        pm.expect(r.id_marinheiro).to.equal(96);\r",
+              "    });\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -201,7 +620,71 @@
       "response": []
     },
     {
+      "name": "US011-/api/reservas/marinheiro/:id-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/reservas/marinheiro/960",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "reservas",
+            "marinheiro",
+            "960"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "EXTRA-/api/barcos/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Resposta é objecto\", function() {\r",
+              "    pm.expect(pm.response.json()).to.be.an('object');\r",
+              "});\r",
+              "pm.test(\"Tem ID_BARCO\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('ID_BARCO');\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -222,13 +705,120 @@
       "response": []
     },
     {
+      "name": "EXTRA-/api/barcos/:id-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/barcos/1050",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "barcos",
+            "1050"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "US010-/api/reservas",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 201\", function() {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "pm.test(\"Tem campo success\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('success');\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"idmarinheiro\": 96,\r\n    \"idbarco\": 105,\r\n    \"data\": \"2026-03-31\"\r\n}",
+          "raw": "{\r\n    \"idmarinheiro\": 96,\r\n    \"idbarco\": 105,\r\n    \"data\": \"2026-04-15\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/reservas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "reservas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "US010-/api/reservas-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 400\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"idmarinheiro\": 9,\r\n    \"idbarco\": 10,\r\n    \"data\": \"2026-04-15\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -252,11 +842,32 @@
     },
     {
       "name": "US012-/api/reservas/:idmarinheiro/:idbarco/:data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 204\", function() {\r",
+              "    pm.response.to.have.status(204);\r",
+              "});\r",
+              "pm.test(\"Sem body\", function() {\r",
+              "    pm.expect(pm.response.text()).to.be.empty;\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/reservas/96/105/2026-03-31",
+          "raw": "http://localhost:8080/api/reservas/96/105/2026-04-15",
           "protocol": "http",
           "host": [
             "localhost"
@@ -267,6 +878,47 @@
             "reservas",
             "96",
             "105",
+            "2026-04-15"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "US012-/api/reservas/:idmarinheiro/:idbarco/:data-erro.testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/reservas/960/1050/2026-03-31",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "reservas",
+            "960",
+            "1050",
             "2026-03-31"
           ]
         }
@@ -275,6 +927,67 @@
     },
     {
       "name": "US009-/api/barcos/disponibilidade/:data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Resposta é array\", function() {\r",
+              "    pm.expect(pm.response.json()).to.be.an('array');\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/barcos/disponibilidade/2026-03-30",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "barcos",
+            "disponibilidade",
+            "2026-03-30"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "US009-/api/barcos/disponibilidade/:data-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -297,11 +1010,32 @@
     },
     {
       "name": "US006-/api/marinheiros/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 204\", function() {\r",
+              "    pm.response.to.have.status(204);\r",
+              "});\r",
+              "pm.test(\"Sem body\", function() {\r",
+              "    pm.expect(pm.response.text()).to.be.empty;\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/marinheiros/96",
+          "raw": "http://localhost:8080/api/marinheiros/99",
           "protocol": "http",
           "host": [
             "localhost"
@@ -310,7 +1044,46 @@
           "path": [
             "api",
             "marinheiros",
-            "96"
+            "99"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "US006-/api/marinheiros/:id-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/marinheiros/990",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "marinheiros",
+            "990"
           ]
         }
       },
@@ -318,6 +1091,30 @@
     },
     {
       "name": "EXTRA-/api/reservas",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Resposta é array\", function() {\r",
+              "    pm.expect(pm.response.json()).to.be.an('array');\r",
+              "});\r",
+              "pm.test(\"Array não está vazio\", function() {\r",
+              "    pm.expect(pm.response.json().length).to.be.above(0);\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 8000ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(8000);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -338,6 +1135,32 @@
     },
     {
       "name": "EXTRA-/api/reservas/barco/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function() {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Resposta é array\", function() {\r",
+              "    pm.expect(pm.response.json()).to.be.an('array');\r",
+              "});\r",
+              "pm.test(\"Todas as reservas são do barco 105\", function() {\r",
+              "    pm.response.json().forEach(r => {\r",
+              "        pm.expect(r.id_barco).to.equal(105);\r",
+              "    });\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -359,13 +1182,74 @@
       "response": []
     },
     {
+      "name": "EXTRA-/api/reservas/barco/:id-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/reservas/barco/1050",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "reservas",
+            "barco",
+            "1050"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "EXTRA-/api/barcos/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 204\", function() {\r",
+              "    pm.response.to.have.status(204);\r",
+              "});\r",
+              "pm.test(\"Sem body\", function() {\r",
+              "    pm.expect(pm.response.text()).to.be.empty;\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
         "method": "PATCH",
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"nome\": \"Barco do Tiago André\"\r\n}",
+          "raw": "{\r\n    \"nome\": \"Kit\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -389,12 +1273,39 @@
       "response": []
     },
     {
-      "name": "EXTRA-/api/barcos/:id",
+      "name": "EXTRA-/api/barcos/:id-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
       "request": {
-        "method": "DELETE",
+        "method": "PATCH",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"Kit\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
-          "raw": "http://localhost:8080/api/barcos/106",
+          "raw": "http://localhost:8080/api/barcos/1050",
           "protocol": "http",
           "host": [
             "localhost"
@@ -403,7 +1314,88 @@
           "path": [
             "api",
             "barcos",
-            "106"
+            "1050"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EXTRA-/api/barcos/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 204\", function() {\r",
+              "    pm.response.to.have.status(204);\r",
+              "});\r",
+              "pm.test(\"Sem body\", function() {\r",
+              "    pm.expect(pm.response.text()).to.be.empty;\r",
+              "});\r",
+              "pm.test(\"Tempo abaixo de 600ms\", function() {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/barcos/107",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "barcos",
+            "107"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EXTRA-/api/barcos/:id-erro-testes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "pm.test(\"Tem campo error\", function() {\r",
+              "    pm.expect(pm.response.json()).to.have.property('error');\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/barcos/1070",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "barcos",
+            "1070"
           ]
         }
       },

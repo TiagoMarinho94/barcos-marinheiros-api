@@ -4,7 +4,7 @@ exports.toDetail = function (obj){
         'nome_marinheiro': obj.NOME_MARINHEIRO,
         'id_barco': obj.ID_BARCO,
         'nome_barco': obj.NOME_BARCO,
-        'data': obj.DATA.toISOString().split('T')[0],
-        'hora': obj.DATA.toISOString().split('T')[1].slice(0,8)
+        'data': obj.DATA.toLocaleDateString('pt-PT', {timeZone: 'Europe/Lisbon'}).split('/').reverse().join('-'),
+        'hora': obj.DATA.toLocaleTimeString('pt-PT', {timeZone: 'Europe/Lisbon'})
     }
 }
