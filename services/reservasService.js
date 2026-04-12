@@ -10,6 +10,11 @@ exports.getReservasByIDMarinheiro = async function (_id) {
     return result.map(item => ReservasDTO.toDetail(item));
 }
 exports.createReserva = async function (_idmarinheiro, _idbarco, _data) {
+    //verificar que a data é futura
+    const hoje = new Date().toLocaleDateString('pt-PT', {timeZone: 'Europe/Lisbon'}).split('/').reverse().join('-');
+    if (_data <= hoje) {
+        return -5;
+    }
     //verificar se marinheiro existe com função já existente
     const mar = await marinheirosRepository.getMarinheirosByID(_idmarinheiro);
     if (!mar)

@@ -26,6 +26,10 @@ exports.createReserva = async function (req,res) {
         //verificar se barco não tem reserva nessa data
         if(result === -4)
             return res.status(404).json({ error: 'Barco já tem reserva nessa data'});
+        if(result === -5)
+            return res.status(400).json({ error: 'A data da reserva tem de ser futura'});
+
+
         if(!result)
             return res.status(503).json({ error: 'Erro ao criar reserva'});
         res.status(201).json({success: 'Reserva criada com sucesso'});
