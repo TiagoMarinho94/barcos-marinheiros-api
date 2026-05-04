@@ -1,63 +1,66 @@
 # barcos-marinheiros-api
-Web API em Node.js para reservar barcos por marinheiros
-## Tecnologias utilizadas
+Node.js Web API to book boats by sailors
+
+## Tech stack
 - Node.js
 - Express
 - Oracle Database (oracledb)
-- Celebrate/Joi (validação)
-- Body-parser
+- Celebrate/Joi (validation)
+- dotenv
 
-## Como executar
-1. Clonar o repositório
-2. Executar `npm install`
-3. Configurar as credenciais de acesso à base de dados em `database/barcos-marinheiros-db.js` - pro default são as minhas
-4. Executar `npm start`
-5. A API fica disponível em `http://localhost:8080`
+## How to run
+1. Clone the repository
+2. Run `npm install`
+3. Copy `.env.example` to `.env` and fill in your database credentials
+4. Run `npm start`
+5. API available at `http://localhost:8080`
 
-## Arquitetura
-O projeto segue uma arquitetura em camadas:
+## Architecture
+The project follows a layered architecture:
 Route → Controller → Service → Repository → Database
-- **Routes** — definem os endpoints e validam os dados com Joi
-- **Controllers** — tratam os pedidos HTTP e devolvem as respostas
-- **Services** — contêm a lógica de negócio
-- **Repositories** — executam as queries SQL na base de dados
-- **Models** — representam os objetos de dados
-- **DTOs** — transformam os dados antes de os devolver ao cliente
 
-## Testes
-Os testes funcionais estão organizados em coleções no Postman e podem ser encontrados na pasta `postman/`.
+- **Routes** - define endpoints and validate input with Joi
+- **Controllers** - handle HTTP requests and return responses
+- **Services** - contain business logic
+- **Repositories** - execute SQL queries against the database
+- **DTOs** - transform data before returning to the client
+
+## Testing
+Functional tests organised as Postman collections, available in the `postman/` folder.
 
 ## Endpoints
 
-### Marinheiros
-| US | Método | Endpoint | Descrição |
-|---|---|---|---| 
-| US002 | GET | /api/marinheiros | Listar todos os marinheiros |
-| US004 | GET | /api/marinheiros/:id | Obter marinheiro por ID |
-| US003 | GET | /api/marinheiros/classificacao/:classif | Filtrar por classificação |
-| US001 | POST | /api/marinheiros | Registar marinheiro |
-| US005/EXTRA | PATCH | /api/marinheiros/:id | Atualizar classificação, nome ou idade |
-| US006 | DELETE | /api/marinheiros/:id | Eliminar marinheiro (só se sem reservas) |
-### Barcos
-| US | Método | Endpoint | Descrição |
-|---|---|---|---| 
-| US008 | GET | /api/barcos | Listar todos os barcos |
-| US007 | POST | /api/barcos | Registar barco |
-| EXTRA | GET | /api/barcos/:id | Obter barco por ID |
-| US009 | GET | /api/barcos/disponibilidade/:data | Listar barcos disponíveis numa data |
-| EXTRA | PATCH | /api/barcos/:id | Atualizar nome ou cor |
-| EXTRA | DELETE | /api/barcos/:id | Eliminar barco |
-### Reservas
-| US | Método | Endpoint | Descrição |
-|---|---|---|---| 
-| US011 | GET | /api/reservas/marinheiro/:id | Listar reservas de um marinheiro |
-| US012 | DELETE | /api/reservas/:idmarinheiro/:idbarco/:data | Cancelar reserva futura |
-| US010 | POST | /api/reservas | Criar reserva |
-| EXTRA | GET | /api/reservas | Listar todas as reservas |
-| EXTRA | GET | /api/reservas/barco/:id | Listar reservas de um barco |
+### Sailors
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/marinheiros` | List all sailors |
+| GET | `/api/marinheiros/:id` | Get sailor by ID |
+| GET | `/api/marinheiros/classificacao/:classif` | Filter by rating |
+| POST | `/api/marinheiros` | Register sailor |
+| PATCH | `/api/marinheiros/:id` | Update name, rating or age |
+| DELETE | `/api/marinheiros/:id` | Delete sailor (only if no reservations) |
 
-## Notas
-- Ao criar uma reserva, o sistema verifica automaticamente se o marinheiro e o barco existem e se ambos estão disponíveis na data pretendida.
-- Não é possível eliminar um marinheiro ou barco que tenha reservas associadas.
-- Apenas é possível cancelar reservas com data futura.
-- As credenciais de acesso à base de dados estão definidas em `database/barcos-marinheiros-db.js`. Em produção, devem ser guardadas em variáveis de ambiente (.env).
+### Boats
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/barcos` | List all boats |
+| GET | `/api/barcos/:id` | Get boat by ID |
+| GET | `/api/barcos/disponibilidade/:data` | List available boats on a date |
+| POST | `/api/barcos` | Register boat |
+| PATCH | `/api/barcos/:id` | Update name or colour |
+| DELETE | `/api/barcos/:id` | Delete boat |
+
+### Reservations
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/reservas` | List all reservations |
+| GET | `/api/reservas/marinheiro/:id` | Reservations by sailor |
+| GET | `/api/reservas/barco/:id` | Reservations by boat |
+| POST | `/api/reservas` | Create reservation |
+| DELETE | `/api/reservas/:idmarinheiro/:idbarco/:data` | Cancel future reservation |
+
+## Notes
+- When creating a reservation, the system automatically checks if both the sailor and the boat exist and are available on the requested date.
+- Sailors and boats with active reservations cannot be deleted.
+- Only future reservations can be cancelled.
+- Database credentials are configured via `.env` (see `.env.example`).
